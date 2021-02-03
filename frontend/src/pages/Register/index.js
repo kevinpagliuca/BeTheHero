@@ -9,36 +9,39 @@ import './styles.css'
 import logoImg from '../../assets/logo.svg';
 
 export default function Register() {
-    const [name, setName] = useState(''); /* PRIMEIRO É O VALOR O SEGUNDO É A FUNÇÃO PARA ATUALIZAR ESSE VALOR */
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [whatsapp, setWhatsapp] = useState('');
     const [city, setCity] = useState('');
     const [uf, setUf] = useState('');
+    const [password, setPassword] = useState('');
 
     const history = useHistory();
 
     async function handleRegister(e) {
         e.preventDefault();
 
-        const data ={
-            name,
-            email,
-            whatsapp,
-            city,
-            uf,
-        };
+        const data = { name, email, password, whatsapp, city, uf };
 
         try {
-        const response = await api.post('ongs', data);
+            const response = await api.post('/ongs', data);
 
-        alert(`Seu ID de acesso: ${response.data.id}`); /* COM CRÁSE PARA COLOCAR VARIAVEIS */
+            alert(`Seu ID de acesso: ${response.data.id}`);
 
-        history.push('/');
+            history.push('/');
 
-        } catch (err){
+        } catch (err) {
             alert('Erro no cadastro, tente novamente');
         }
     }
+
+    // const handleKeyUp = useCallback((e) => {
+    //     e.currentTarget.maxLength = 11;
+    //     let value = e.currentTarget.value;
+    //     value = value.replace(/\D/g, "");
+    //     value = value.replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+    //     e.currentTarget.value= value;
+    // }, []);
 
     return (
         <div className="register-container">
@@ -55,46 +58,57 @@ export default function Register() {
                     </Link>
 
                 </section>
-                <form>
-                    <form onSubmit={handleRegister}>
+                <form onSubmit={handleRegister}>
+                    <input
+                        placeholder="Nome da sua ONG"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        required
+                    />
+
+                    <input
+                        type="email"
+                        placeholder="E-mail"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                    />
+
+                    <input
+                        type="password"
+                        placeholder="Senha"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        required
+                    />
+
+                    <input
+                        type="text"
+                        placeholder="Whatsapp"
+                        
+                        value={whatsapp}
+                        onChange={e => setWhatsapp(e.target.value)}
+                        required
+                    />
+
+                    <div className="input-group">
                         <input
-                            placeholder="Nome da ONG"
-                            value={name}
-                            onChange={e => setName(e.target.value)}
+                            placeholder="Cidade"
+                            value={city}
+                            onChange={e => setCity(e.target.value)}
+                            required
                         />
-
                         <input
-                            type="email"
-                            placeholder="E-mail"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
+                            placeholder="UF"
+                            style={{ width: 80 }}
+                            value={uf}
+                            onChange={e => setUf(e.target.value)}
+                            required
                         />
-
-
-                        <input
-                            placeholder="Whatsapp"
-                            value={whatsapp}
-                            onChange={e => setWhatsapp(e.target.value)}
-                        />
-
-                        <div className="input-group">
-                            <input
-                                placeholder="Cidade"
-                                value={city}
-                                onChange={e => setCity(e.target.value)}
-                            />
-                            <input
-                                placeholder="UF"
-                                style={{ width: 80 }}
-                                value={uf}
-                                onChange={e => setUf(e.target.value)}
-                            />
-                        </div>
-
-                        <button className="button" type="submit">Cadastrar</button>
-                    </form>
-
+                    </div>
+                    <button className="button" type="submit">Cadastrar</button>
                 </form>
+
             </div>
         </div>
     )

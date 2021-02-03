@@ -12,7 +12,6 @@ app.use(errors());
 
 module.exports = app;
 
-
 /*
 GET: Buscar/listar uma informação do backend
 POST: Criar uma informação do backend

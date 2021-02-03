@@ -1,5 +1,6 @@
 const generateUniqueId = require('../utils/generateUniqueId');
 const connection = require('../database/connection');
+const bcrypt = require('bcrypt');
 
 module.exports = {
 
@@ -8,28 +9,30 @@ module.exports = {
         return response.json(ongs);
     },
 
-
     async create(request, response) {
-        const { name, email, whatsapp, city, uf } = request.body;
+        const { name, email, password, whatsapp, city, uf } = request.body;
 
         const id = generateUniqueId();
+
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);    
 
         await connection('ongs').insert({
             id,
             name,
             email,
+            password: hash,
             whatsapp,
             city,
             uf,
         })
-        return response.json({ id });
+        return response.json({id});
     },
-
 
     async delete(request, response) {
         const { name } = request.params;
 
-        const Ong = await connection('ongs')
+        await connection('ongs')
             .where('name', name)
             .delete();
         return response.status(204).send();
