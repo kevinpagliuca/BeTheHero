@@ -6,11 +6,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 34px 0;
 }
 
 .myaccount-container .content {
     width: 100%;
-    padding: 74px;
+    padding: 56px;
     background: #f0f0f5;
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -40,6 +41,32 @@
     max-width: 450px;
 }
 
-.myaccount-container .content form input, .myaccount-container .content form textarea {
+.myaccount-container .content form input {
     margin-top: 8px;
+    height: auto;
+    padding: 14px 26px;
+}
+
+.myaccount-container .content form .input-group {
+    margin-bottom: 10px;
+}
+
+
+.myaccount-container .content form .input-group label {
+    font: 400 16px Roboto;
+    color: #737380;
+}
+
+.myaccount-container .content form .input-group .group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.myaccount-container .content form .changePass {
+    font: 400 14px Roboto;
+    text-decoration: underline;
+    color: #E02041;
+    cursor: pointer;
+    float: right;
 }

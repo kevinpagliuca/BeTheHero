@@ -6,10 +6,11 @@ import logoImg from '../../assets/logo.svg';
 
 import './styles.css';
 import api from '../../services/api';
+import ChangePassModal from '../../components/Modal/ChangePassModal';
 
 const MyAccount = () => {
-    const [ongInfo, setOngInfo] = useState([]);
     const id = localStorage.getItem('ongId');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const [ongName, setOngName] = useState('');
     const [ongEmail, setOngEmail] = useState('');
@@ -19,13 +20,25 @@ const MyAccount = () => {
     const [UF, setUF] = useState('');
 
     useEffect(() => {
-       api.post('/ongInfo', {id})
-        .then((res) => {
-            setOngInfo(res.data);
-        }).catch((err) => {
-            alert('Algum erro ocorreu, tente novamente!');
-        })
-    }, [ongInfo]);
+        api.post('/ongInfo', { id })
+            .then((res) => {
+                setOngName(res.data.name);
+                setOngEmail(res.data.email);
+                setWhatsapp(res.data.whatsapp);
+                setCity(res.data.city);
+                setUF(res.data.uf);
+            }).catch((err) => {
+                alert('Algum erro ocorreu, tente novamente!');
+            })
+    }, [id]);
+
+    function toggleModal() {
+        if (modalVisible === false) {
+            setModalVisible(true)
+        } else {
+            setModalVisible(false);
+        }
+    }
 
     return (
         <div className="myaccount-container">
@@ -44,38 +57,70 @@ const MyAccount = () => {
                 </section>
 
                 <form onSubmit={() => { }}>
+
                     <div className="input-group">
-                        <label>Nome da ONG</label>
+                        <label>Nome da Instituição</label>
                         <input
                             placeholder="Nome da ong"
                             type="text"
                             value={ongName}
+                            onChange={e => setOngName(e.target.value)}
                         />
                     </div>
+
                     <div className="input-group">
-                        <label>Nome da ONG</label>
+                        <label>E-mail</label>
                         <input
                             placeholder="Nome da ong"
-
+                            value={ongEmail}
+                            onChange={e => setOngEmail(e.target.value)}
                         />
                     </div>
+
                     <div className="input-group">
-                        <label>Nome da ONG</label>
+                        <label>Whatsapp</label>
                         <input
                             placeholder="Nome da ong"
-
+                            value={whatsapp}
+                            onChange={e => setWhatsapp(e.target.value)}
                         />
                     </div>
+
                     <div className="input-group">
-                        <label>Nome da ONG</label>
-                        <input
-                            placeholder="Nome da ong"
+                        <label>Cidade e UF</label>
+                        <div className="group">
 
-                        />
+                            <input
+                                placeholder="Nome da ong"
+                                value={city}
+                                onChange={e => setCity(e.target.value)}
+                            />
+
+                            <input
+                                placeholder="UF"
+                                value={UF}
+                                style={{ width: 80, marginLeft: 10 }}
+                                onChange={e => setUF(e.target.value)}
+                            />
+                        </div>
                     </div>
 
-                    <button className="button" type="submit">Cadastrar</button>
+                    <span
+                        className="changePass"
+                        onClick={toggleModal}
+                    >
+                        Desejo alterar minha senha!
+                    </span>
+
+
+
+                    <button className="button" type="submit">Atualizar dados</button>
                 </form>
+
+                <ChangePassModal
+                    modalVisible={toggleModal}
+                    visible={modalVisible}
+                />
             </div>
         </div>
     )
