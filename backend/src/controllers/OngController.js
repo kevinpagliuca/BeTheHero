@@ -9,13 +9,28 @@ module.exports = {
         return response.json(ongs);
     },
 
+    async show(request, response) {
+        const { id } = request.body;
+
+        const ongInfo = await connection('ongs')
+            .select('*')
+            .where('id', id)
+            .first();
+
+        if (ongInfo) {
+            return response.status(200).json(ongInfo);
+        } else {
+            return response.status(404).json({ Error: "No ONG found with this ID" })
+        }
+    },
+
     async create(request, response) {
         const { name, email, password, whatsapp, city, uf } = request.body;
 
         const id = generateUniqueId();
 
         const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(password, salt);    
+        const hash = bcrypt.hashSync(password, salt);
 
         await connection('ongs').insert({
             id,
@@ -26,7 +41,7 @@ module.exports = {
             city,
             uf,
         })
-        return response.json({id});
+        return response.json({ id });
     },
 
     async delete(request, response) {

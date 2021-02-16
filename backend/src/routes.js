@@ -24,6 +24,7 @@ routes.get('/profile', celebrate({
 }), ProfileController.index);
 
 routes.get('/ongs', OngController.index);
+routes.post('/ongInfo', OngController.show);
 
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
