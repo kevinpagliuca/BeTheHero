@@ -108,11 +108,11 @@
 }
 .lading-container ul li .description span {
     text-decoration: underline;
-    color: #41414d;
+    color: rgb(0, 153,255);
 }
 
 .lading-container ul li .description span:hover {
-    color: rgb(0, 153,255);
+    color: rgb(25, 0, 255);
 }
 
 

@@ -14,26 +14,26 @@ export default function Incidents() {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
-    const navigation = useNavigation();   
+    const navigation = useNavigation();
 
     function navigateToDetail(incident) {
         navigation.navigate('Detail', { incident });
     }
 
     async function loadIncidents() {
-        if(loading){
+        if (loading) {
             return;
         }
-        if (total > 0 && incidents.length === total){
+        if (total > 0 && incidents.length === total) {
             return;
         }
 
         setLoading(true);
 
-        const response = await api.get('incidents',{
+        const response = await api.get('incidents', {
             params: { page }
-        });        
-        setIncidents([... incidents, ... response.data]);
+        });
+        setIncidents([...incidents, ...response.data[1]]);
         setTotal(response.headers['x-total-count']);
         setPage(page + 1);
         setLoading(false);
@@ -41,7 +41,7 @@ export default function Incidents() {
 
     useEffect(() => {
         loadIncidents();
-    }, []);
+    }, [incidents]);
 
     return (
 

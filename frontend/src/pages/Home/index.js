@@ -87,10 +87,13 @@ const Landing = () => {
 
 
                         </div>
-
-                        <button onClick={() => handleDeleteIncident(incident.id)} type="button">
-                            <FiTrash2 size={20} color="#a8a8b3" />
-                        </button>
+                        {ongId === incident.ong_id ?
+                            <button onClick={() => handleDeleteIncident(incident.id)} type="button">
+                                <FiTrash2 size={20} color="#a8a8b3" />
+                            </button>
+                            :
+                            null
+                        }
                     </li>
                 ))}
             </ul>
