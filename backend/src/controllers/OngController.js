@@ -44,6 +44,32 @@ module.exports = {
         return response.json({ id });
     },
 
+    async update(request, response) {
+        const  id  = request.headers.id;
+        const { name, email, whatsapp, city, uf } = request.body;
+
+        const consult = await connection('ongs')
+            .select('name')
+            .where('id', id)
+            .first();
+
+        if (consult) {
+            await connection('ongs')
+                .where('id', id)
+                .update({
+                    name,
+                    email,
+                    whatsapp,
+                    city,
+                    uf
+                });
+
+            return response.status(200).json({ Success: 'Atualizado com sucesso!' });
+        } else {
+            return response.status(400).json({ Error: 'Não conseguimos atualizar seus dados, tente novamente!' })
+        }
+    },
+
     async delete(request, response) {
         const { name } = request.params;
 

@@ -9,8 +9,8 @@ module.exports = {
         console.log(count);
         const incidents = await connection('incidents')
             .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
-            .limit(5)
-            .offset((page - 1) * 5)
+            .limit(8)
+            .offset((page - 1) * 8)
             .select([
                 'incidents.*',
                 'ongs.name',
@@ -20,11 +20,11 @@ module.exports = {
                 'ongs.uf'
             ]);
 
+        const total = count['count(*)'];
         response.header('X-Total-Count', count['count(*)']);
 
-        return response.json(incidents);
+        return response.status(200).json([{ total }, incidents]);
     },
-
 
     async create(request, response) {
         const { title, description, value } = request.body;

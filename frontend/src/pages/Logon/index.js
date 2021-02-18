@@ -26,13 +26,13 @@ export default function Logon() {
                 localStorage.setItem('ongId', response.data.id);
                 localStorage.setItem('ongEmail', response.data.email);
                 localStorage.setItem('ongName', response.data.name);
-                history.push('/profile');
+                history.push('/home');
             } else {
                 const response = await api.post('sessions', { id, password, option });
                 localStorage.setItem('ongId', response.data.id);
                 localStorage.setItem('ongEmail', response.data.email);
                 localStorage.setItem('ongName', response.data.name);
-                history.push('/profile');
+                history.push('/home');
             }
         } catch (err) {
             alert('Falha no login, tente novamente');

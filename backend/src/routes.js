@@ -17,7 +17,7 @@ routes.post('/sessions', celebrate({
     }),
 }), SessionController.create);
 
-routes.get('/profile', celebrate({
+routes.get('/myincidents', celebrate({
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required(),
     }).unknown(),
@@ -36,6 +36,8 @@ routes.post('/ongs', celebrate({
         uf: Joi.string().required().length(2),
     })
 }), OngController.create);
+
+routes.put('/ongs', OngController.update);
 
 routes.delete('/ongs/:name', OngController.delete);
 
@@ -61,8 +63,5 @@ routes.delete('/incidents/:id', celebrate({
         id: Joi.number().required(),
     }),
 }), IncidentController.delete);
-
-
-
 
 module.exports = routes;

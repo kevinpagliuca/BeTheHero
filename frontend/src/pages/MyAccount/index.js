@@ -12,18 +12,17 @@ const MyAccount = () => {
     const id = localStorage.getItem('ongId');
     const [modalVisible, setModalVisible] = useState(false);
 
-    const [ongName, setOngName] = useState('');
-    const [ongEmail, setOngEmail] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [whatsapp, setWhatsapp] = useState('');
-    const [password, setPassword] = useState('');
     const [city, setCity] = useState('');
-    const [UF, setUF] = useState('');
+    const [uf, setUF] = useState('');
 
     useEffect(() => {
         api.post('/ongInfo', { id })
             .then((res) => {
-                setOngName(res.data.name);
-                setOngEmail(res.data.email);
+                setName(res.data.name);
+                setEmail(res.data.email);
                 setWhatsapp(res.data.whatsapp);
                 setCity(res.data.city);
                 setUF(res.data.uf);
@@ -40,6 +39,22 @@ const MyAccount = () => {
         }
     }
 
+    async function handleUpdateData(e) {
+        e.preventDefault();
+
+        const dataUser = { name, email, whatsapp, city, uf };
+
+        await api.put('/ongs', dataUser, {
+            headers: { id }
+        }).then(res => {
+            localStorage.setItem('ongEmail', email);
+            localStorage.setItem('ongName', name);            
+            alert('Dados alterados com sucesso!');
+        }).catch(err => {
+            alert('Algum erro ocorreu durante a atualização de dados, tente novamente!')
+        })
+    }
+
     return (
         <div className="myaccount-container">
 
@@ -50,21 +65,21 @@ const MyAccount = () => {
                     <h1>Minha conta</h1>
                     <p>Aqui você pode consultar seus dados e atualizá-los sempre que precisar para continuar trazendo o heroísmo a todos!</p>
 
-                    <Link className="back-link" to="/profile">
+                    <Link className="back-link" to="/home">
                         <FiArrowLeft size={16} color="#E02041" />
                         Voltar para home
                     </Link>
                 </section>
 
-                <form onSubmit={() => { }}>
+                <form onSubmit={handleUpdateData}>
 
                     <div className="input-group">
                         <label>Nome da Instituição</label>
                         <input
                             placeholder="Nome da ong"
                             type="text"
-                            value={ongName}
-                            onChange={e => setOngName(e.target.value)}
+                            value={name}
+                            onChange={e => setName(e.target.value)}
                         />
                     </div>
 
@@ -72,8 +87,8 @@ const MyAccount = () => {
                         <label>E-mail</label>
                         <input
                             placeholder="Nome da ong"
-                            value={ongEmail}
-                            onChange={e => setOngEmail(e.target.value)}
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </div>
 
@@ -98,7 +113,7 @@ const MyAccount = () => {
 
                             <input
                                 placeholder="UF"
-                                value={UF}
+                                value={uf}
                                 style={{ width: 80, marginLeft: 10 }}
                                 onChange={e => setUF(e.target.value)}
                             />

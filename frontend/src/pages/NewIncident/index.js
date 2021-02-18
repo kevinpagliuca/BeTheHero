@@ -24,14 +24,14 @@ export default function NewIncident() {
             description,
             value,
         };
-        console.log(ongId);
+        
         try {
             await api.post('incidents', data, {
                 headers: {
                     Authorization: ongId,
                 }
             });            
-            history.push('/profile');            
+            history.push('/myincidents');            
         } catch (err) {
             console.log(err);
             alert('Erro, não foi possivel cadastrar novo caso, tente novamente.');
@@ -48,7 +48,7 @@ export default function NewIncident() {
                     <h1>Cadastrar novo caso</h1>
                     <p>Descreva o caso detalhadamente para encontrar um herói para resolver isso.</p>
 
-                    <Link className="back-link" to="/profile">
+                    <Link className="back-link" to="/home">
                         <FiArrowLeft size={16} color="#E02041" />
                         Voltar para home
                     </Link>

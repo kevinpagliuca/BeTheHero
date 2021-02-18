@@ -5,15 +5,15 @@ import './styles.css';
 
 const ChangePassModal = (props) => {
     return (
-        <div className={props.visible === false ? "backdrop" : "backdrop activeModal"}>
+        <div className={props.visible === false ? "backdrop" : "backdrop activeModal"} onClick={props.modalVisible}  >
             <div className="container-modal">
                 <article className="modal-content">
                     <h2>Alterar minha senha</h2>
 
                     <FaTimes
                         className="closeModal-icon"
-                        size={24}    
-                        onClick={props.modalVisible}                    
+                        size={24}
+                        onClick={props.modalVisible}
                     />
 
                     <form className="cpass-form">
@@ -22,7 +22,7 @@ const ChangePassModal = (props) => {
                                 placeholder="Senha antiga"
                             />
                         </div>
-                        <div className="input-group">                            
+                        <div className="input-group">
                             <input
                                 placeholder="Nova senha"
                             />

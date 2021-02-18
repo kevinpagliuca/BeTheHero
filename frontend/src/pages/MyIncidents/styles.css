@@ -12,8 +12,8 @@
 
 .profile-container ul {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* PODERIA SER  grid-template-columns: repeat (2, 1fr) */
+    grid-template-columns: 2fr 2fr;
+    /* grid-template-columns: repeat(2, 1fr); */
     grid-gap: 24px;
     list-style: none;
 }
@@ -30,6 +30,7 @@
     right: 24px;
     top: 24px;
     border: 0;
+    background: transparent;
 }
 
 .profile-container ul li button:hover {
