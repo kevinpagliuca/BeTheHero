@@ -10,7 +10,6 @@ import api from '../../services/api';
 export default function Profile() {
     const [incidents, setIncidents] = useState([]);
     const ongId = localStorage.getItem('ongId');
-    const ongName = localStorage.getItem('ongName');
 
     const [totalData, setTotalData] = useState(0);
     const LastPage = Math.ceil(totalData / 6);

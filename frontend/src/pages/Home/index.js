@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FiTrash2 } from 'react-icons/fi';
+import { FiArrowRight, FiTrash2 } from 'react-icons/fi';
 
 import Header from '../../components/Header';
 
@@ -7,6 +7,7 @@ import './styles.css';
 
 import api from '../../services/api';
 import Pagination from '../../components/Pagination';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
     const [incidents, setIncidents] = useState([]);
@@ -64,7 +65,7 @@ const Landing = () => {
                             <p className="ongName">{incident.name}</p>
 
                             <div>
-                                <strong>Valor</strong>
+                                <strong>Valor <FiArrowRight /></strong>
                                 <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(incident.value)}</p>
                             </div>
                         </header>
@@ -87,9 +88,14 @@ const Landing = () => {
 
 
                         </div>
+                        
+                        <Link className="show-detail" to={`incidentdetail/${incident.id}`}>
+                            <span>Ver mais detalhes</span>
+                        </Link>
+
                         {ongId === incident.ong_id ?
                             <button onClick={() => handleDeleteIncident(incident.id)} type="button">
-                                <FiTrash2 size={20} color="#a8a8b3" />
+                                <FiTrash2 size={20} color="#fff" />
                             </button>
                             :
                             null

@@ -26,6 +26,21 @@ module.exports = {
         return response.status(200).json([{ total }, incidents]);
     },
 
+    async show(request, response) {
+        const { id } = request.params;
+
+        const incident = await connection('incidents')
+        .where('id', id)
+        .first()
+        .select('*');
+
+        if(incident) {
+            return response.status(200).json(incident);
+        } else {
+            return response.status(400).json({Error: 'Error, no incident found with this ID'})
+        }
+    },
+
     async create(request, response) {
         const { title, description, value } = request.body;
         const ong_id = request.headers.authorization;

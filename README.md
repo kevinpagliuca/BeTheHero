@@ -1,7 +1,7 @@
 # BeTheHero
 
 
-##### Esse projeto foi construído durante a Semana Omnistack 11.0, dirigia pelo Diego Fernandes da Rocketseat, que particularmente adota uma didática muito clara e passou muitos conhecimentos dessa Stack Reactjs com Nodejs.
+##### Esse projeto foi construído durante a Semana Omnistack 11.0, dirigia pelo Diego Fernandes da Rocketseat, que adota uma didática muito clara e passou muitos conhecimentos dessa Stack Reactjs com Nodejs.
 
 
 # Inicializando o projeto

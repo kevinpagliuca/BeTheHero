@@ -8,6 +8,7 @@ import MyIncidents from './pages/MyIncidents';
 import NewIncident from './pages/NewIncident';
 import MyAccount from './pages/MyAccount';
 import Home from './pages/Home';
+import Details from './pages/Details';
 
 export default function Routes() {
     return (
@@ -22,6 +23,8 @@ export default function Routes() {
                 <Route path="/myaccount" component={MyAccount} />
 
                 <Route path="/home" component={Home} />
+
+                <Route path="/incidentdetail/:id" component={Details} />
             </Switch>
         </BrowserRouter>
     )

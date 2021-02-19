@@ -47,6 +47,8 @@ routes.get('/incidents', celebrate({
     })
 }), IncidentController.index);
 
+routes.get('/incidents/:id', IncidentController.show);
+
 routes.post('/incidents', celebrate({
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required(),

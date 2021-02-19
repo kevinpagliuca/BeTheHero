@@ -19,7 +19,11 @@
 }
 
 .lading-container ul li {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
     background: #fff;
+    box-shadow: 0 0 28px rgb(0,0,0, 0.1);
     padding: 24px;
     border-radius: 8px;
     position: relative;
@@ -32,28 +36,29 @@
 }
 
 .lading-container ul li button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     right: 24px;
     top: 24px;
     border: 0;
     border-radius: 50%;
-    background: transparent;
+    background: #e02041;
+    box-shadow: 0 0 4px #e02041;
+    padding: 6px;
 }
 
-.lading-container ul li button:hover {
-    background: #fff !important;
-}
-
-.lading-container ul li button:hover svg {
-    color: #e02041 !important;
+.lading-container ul li button:hover {    
+   filter: brightness(75%);
 }
 
 .lading-container ul li header {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
     flex-direction: column;
     margin-bottom: 10px;
+    height: 100%;
 }
 
 .lading-container ul li header strong.title {
@@ -82,10 +87,17 @@
     margin-right: 10px;
 }
 
+.lading-container ul li header div>p {
+    font: 700 14px Roboto;
+    color: #e02041;
+}
+
 .lading-container ul li .description {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-bottom: 16px;
+    width: 100%;
 }
 
 .lading-container ul li .description strong {
@@ -98,21 +110,46 @@
     overflow: hidden;
     text-align: justify;
     height: 100%;
-    line-height: 20px;  
+    line-height: 20px;
 }
+
 .lading-container ul li .description p.hiddenText {
     overflow: hidden;
     text-align: justify;
     height: 60px;
-    line-height: 20px;  
+    line-height: 20px;
 }
+
 .lading-container ul li .description span {
     text-decoration: underline;
-    color: rgb(0, 153,255);
+    color: #e02041;
+    transition: all .3s;
 }
 
 .lading-container ul li .description span:hover {
-    color: rgb(25, 0, 255);
+    filter: brightness(75%);
+}
+
+.lading-container ul li:hover .show-detail {
+    display: block !important;
+}
+
+
+.lading-container ul li .show-detail {
+    position: absolute;
+    display: none;
+    right: 24px;
+    bottom: 24px;    
+    text-decoration: none;
+}
+
+.lading-container ul li .show-detail span {
+    color: #fff;
+    font: 500 16px Roboto;
+    background: #e02041;
+    box-shadow: 0 0 4px #e02041;
+    padding: 5px 14px;
+    border-radius: 6px;
 }
 
 
